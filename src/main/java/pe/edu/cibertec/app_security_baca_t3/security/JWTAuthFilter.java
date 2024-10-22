@@ -4,7 +4,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +29,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
             } else {
                 SecurityContextHolder.clearContext();
             }
+            filterChain.doFilter(request, response);
         } catch(Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
